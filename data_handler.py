@@ -4,6 +4,12 @@ from typing import Dict
 FIELDNAMES = ["power","channel","volume","muted"]
 
 def save_tv_state(filepath: str, state: Dict[str, int | bool]) -> None:
+    """
+    Saves TV to a CSV file.
+
+    :param filepath: The path to the CSV file.
+    :param state: A dictionary with keys 'power', 'channel', 'volume', 'muted.'
+    """
     try:
         with open(filepath, mode = 'w', newline='') as file:
             writer = csv.DictWriter(file, fieldnames=FIELDNAMES)
@@ -18,6 +24,13 @@ def save_tv_state(filepath: str, state: Dict[str, int | bool]) -> None:
         print(f"Error saving TV state: {e}")
 
 def load_tv_state(filepath: str) -> Dict[str, int | bool]:
+    """
+    Loads the TV state from a CSV file.
+    Returns default values on error.
+
+    :param filepath: The path to the CSV file.
+    :return: A dictionary containing TV state.
+    """
     try:
         with open(filepath, mode='r') as file:
             reader = csv.DictReader(file)
